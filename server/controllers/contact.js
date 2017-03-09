@@ -22,6 +22,25 @@ module.exports = {
      .catch(error => res.status(400).send(error));
  },
 
+ updateContact (req, res) {
+   Contact.update(req.body, {
+       fields: [
+        'first_name',
+        'last_name',
+        'phone',
+        'city',
+        'state',
+        'photo_url',
+        'email'
+     ],
+      where: {
+        id: req.params.id
+      }
+   })
+   .then(updatedValue => res.status(200).send(updatedValue))
+   .catch(error => res.status(400).send(error));
+ },
+
   delete (req, res) {
     Contact.destroy({
       where: {
